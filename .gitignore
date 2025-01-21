@@ -1,0 +1,64 @@
+# Build results
+bin/
+obj/
+
+# VS Code settings
+.vscode/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Mono auto-generated files
+mono_crash.*
+
+# Visual Studio working directory
+.vs/
+
+# ASP.NET files
+node_modules/
+wwwroot/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+*.swp
+
+# Environment variables
+.env
+.env.*
+
+# Backup files
+*.bak
+*.old
+*~
+
+# Generated files
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+*.ilk
+*.idb
+*.tlog
+*.log
+*.vspscc
+*.vsp
+*.sln.ide
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+.nuget/
+
+# Rider IDE files
+.idea/
+*.sln.iml
