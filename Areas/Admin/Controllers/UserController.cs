@@ -11,21 +11,21 @@ namespace Bookstore.Areas.Admin.Controllers
     [Area("Admin")]
     public class UserController : Controller
     {
-        private UserManager<User> userManager;
+        private UserManager<User> _userManager;
         private RoleManager<IdentityRole> roleManager;
         public UserController(UserManager<User> userMngr, 
             RoleManager<IdentityRole> roleMngr)
         {
-            userManager = userMngr;
+            _userManager = userMngr;
             roleManager = roleMngr;
         }
 
         public async Task<IActionResult> Index()
         {
             List<User> users = new List<User>();
-            foreach (User user in userManager.Users)
+            foreach (User user in _userManager.Users)
             {
-                user.RoleNames = await userManager.GetRolesAsync(user);
+                user.RoleNames = await _userManager.GetRolesAsync(user);
                 users.Add(user);
             }
             UserViewModel model = new UserViewModel
@@ -39,10 +39,10 @@ namespace Bookstore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            User user = await userManager.FindByIdAsync(id);
+            User user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                IdentityResult result = await userManager.DeleteAsync(user);
+                IdentityResult result = await _userManager.DeleteAsync(user);
                 if (!result.Succeeded) // if failed
                 {
                     string errorMessage = "";
@@ -69,7 +69,7 @@ namespace Bookstore.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.Username };
-                var result = await userManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -96,8 +96,8 @@ namespace Bookstore.Areas.Admin.Controllers
             }
             else
             {
-                User user = await userManager.FindByIdAsync(id);
-                await userManager.AddToRoleAsync(user, adminRole.Name);
+                User user = await _userManager.FindByIdAsync(id);
+                await _userManager.AddToRoleAsync(user, adminRole.Name);
             }
             return RedirectToAction("Index");
         }
@@ -105,8 +105,8 @@ namespace Bookstore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromAdmin(string id)
         {
-            User user = await userManager.FindByIdAsync(id);
-            var result = await userManager.RemoveFromRoleAsync(user, "Admin");
+            User user = await _userManager.FindByIdAsync(id);
+            var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
             if (result.Succeeded) { }
             return RedirectToAction("Index");
         }

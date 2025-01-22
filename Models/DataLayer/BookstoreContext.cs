@@ -47,7 +47,7 @@ namespace Bookstore.Models
 
         public static async Task CreateAdminUser(IServiceProvider serviceProvider)
         {
-            UserManager<User> userManager =
+            UserManager<User> _userManager =
                 serviceProvider.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager =
                 serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -63,13 +63,13 @@ namespace Bookstore.Models
             }
 
             // if username doesn't exist, create it and add to role
-            if (await userManager.FindByNameAsync(username) == null)
+            if (await _userManager.FindByNameAsync(username) == null)
             {
                 User user = new User { UserName = username };
-                var result = await userManager.CreateAsync(user, password);
+                var result = await _userManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, roleName);
+                    await _userManager.AddToRoleAsync(user, roleName);
                 }
             }
         }

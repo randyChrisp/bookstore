@@ -60,8 +60,8 @@
                     
                     <!-- These Login buttons and links could be a partial class or a view component -->
                     @using Microsoft.AspNetCore.Identity
-                    @inject SignInManager<User> signInManager
-                    @if (signInManager.IsSignedIn(User))
+                    @inject SignInManager<User> _signInManager
+                    @if (_signInManager.IsSignedIn(User))
                     {
                         // signed-in user - Log Out button and username
                         <li class="nav-item">

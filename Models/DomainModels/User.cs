@@ -7,6 +7,7 @@ namespace Bookstore.Models
     public class User : IdentityUser
     {
         [NotMapped]
-        public IList<string> RoleNames { get; set; }
+        // This property holds the names of the roles assigned to the user
+                public IList<string> RoleNames { get; set; }
     }
 }
