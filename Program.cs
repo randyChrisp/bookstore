@@ -20,11 +20,8 @@ namespace Bookstore
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    /*
-                    webBuilder.UseStartup<Startup>();
-                    */
                     webBuilder.UseStartup<Startup>()
-                    .UseDefaultServiceProvider(           // add this
+                    .UseDefaultServiceProvider(
                         options => options.ValidateScopes = false);
 
                 });

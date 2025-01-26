@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;    // add this
+using Microsoft.AspNetCore.Identity;
 using Bookstore.Models;
+
 
 namespace Bookstore
 {
@@ -30,7 +31,8 @@ namespace Bookstore
                 options.UseSqlServer(Configuration.GetConnectionString("BookstoreContext")));
 
             // add this
-            services.AddIdentity<User, IdentityRole>(options => {
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
@@ -76,7 +78,7 @@ namespace Bookstore
                     pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
             });
 
-            BookstoreContext.CreateAdminUser(app.ApplicationServices).Wait();  // add this
+            BookstoreContext.CreateAdminUser(app.ApplicationServices).Wait(); 
         }
     }
 }
